@@ -26,7 +26,7 @@ stages:
     steps:
       - task: Docker@2
         inputs:
-          containerRegistry: 'ACRDocker'
+          containerRegistry: 'ACRDockerrt'
           repository: '$(repository)'
           command: 'buildAndPush'
           Dockerfile: '**/Dockerfile'
@@ -60,16 +60,16 @@ stages:
            - task: KubernetesManifest@0
              displayName: Create imagePullSecret
              inputs:
-                kubernetesServiceConnection: $(k8sconnection)
+                kubernetesServiceConnection: $(rtech)
                 action: createSecret
                 secretName: $(imagePullSecret)
                 namespace: $(namespace)
-                dockerRegistryEndpoint: 'ACRDocker'
+                dockerRegistryEndpoint: 'ACRDockerrt'
               
            - task: KubernetesManifest@0
              displayName: Deploy
              inputs:
-              kubernetesServiceConnection: $(k8sconnection)
+              kubernetesServiceConnection: $(rtech)
               action: deploy
               namespace: $(namespace)
               manifests: |
