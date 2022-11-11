@@ -60,7 +60,7 @@ stages:
            - task: KubernetesManifest@0
              displayName: Create imagePullSecret
              inputs:
-                kubernetesServiceConnection: $(rtech)
+                kubernetesServiceConnection: $(rtech1)
                 action: createSecret
                 secretName: $(imagePullSecret)
                 namespace: $(namespace)
@@ -69,7 +69,7 @@ stages:
            - task: KubernetesManifest@0
              displayName: Deploy
              inputs:
-              kubernetesServiceConnection: $(rtech)
+              kubernetesServiceConnection: $(rtech1)
               action: deploy
               namespace: $(namespace)
               manifests: |
